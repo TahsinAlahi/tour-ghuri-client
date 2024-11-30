@@ -10,13 +10,13 @@ function NavBar() {
   }
 
   function activeClass({ isActive }) {
-    return `block md:py-1 py-2 px-3  rounded text-black font-semibold hover:bg-green-500 ${
-      isActive ? "bg-[#5897de]" : "md:bg-transparent"
+    return `block md:py-1 py-2 px-3  rounded text-black font-semibold hover:bg-nav-active ${
+      isActive ? "bg-nav-active" : "md:bg-transparent"
     }`;
   }
 
   return (
-    <nav className="bg-[#8fbfda] border-gray-200 w-full font-roboto">
+    <nav className="bg-nav border-gray-200 w-full font-roboto">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:px-7 ">
         <Link
           to="/"
@@ -64,25 +64,30 @@ function NavBar() {
                 Home
               </NavLink>
             </li>
-            <li className="hidden md:block">
+            <li className="md:block">
               <NavLink to="/all-tourist-spots" className={activeClass}>
                 Tourist Spots
               </NavLink>
             </li>
-            <li className="hidden md:block">
+            <li className="md:block">
               <NavLink to="/new-spots" className={activeClass}>
                 Add tourist spots
               </NavLink>
             </li>
-            <li className="hidden md:block">
+            <li className="md:block">
               <NavLink to="/my-list" className={activeClass}>
                 My list
               </NavLink>
             </li>
-
-            <li className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer hover:bg-green-500 md:hidden">
-              <div>Logout</div>
+            <li className="md:block">
+              <div className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer">
+                Logout
+              </div>
             </li>
+
+            {/* <li className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer hover:bg-nav-active md:hidden">
+              <div>Logout</div>
+            </li> */}
           </ul>
         </div>
         <div className="md:flex items-center justify-center gap-2 ml-10 hidden">
@@ -97,7 +102,7 @@ function NavBar() {
             />
           </div>
 
-          <h1 className="bg-green-500/90 px-2 py-1 rounded font-semibold cursor-pointer">
+          <h1 className="bg-nav-active hover:bg-blue-600 duration-100 transition-all  px-2 py-1 rounded font-semibold cursor-pointer">
             Login
           </h1>
         </div>
