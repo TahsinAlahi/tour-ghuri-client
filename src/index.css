@@ -3,3 +3,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.growing-border::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: solid 3px black;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+.growing-border:hover::after {
+  transform: scaleX(1);
+}
