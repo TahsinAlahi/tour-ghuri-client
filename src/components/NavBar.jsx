@@ -16,14 +16,14 @@ function NavBar() {
   }
 
   return (
-    <nav className="bg-nav border-gray-200 w-full font-roboto">
+    <nav className="bg-nav border-gray-200 w-full font-nunito">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:px-7 ">
         <Link
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img src={logoImg} className="h-10 aspect-square" alt="EarthBound" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap font-playfair">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap font-cinzel">
             Tour Ghuri
           </span>
         </Link>
@@ -56,7 +56,7 @@ function NavBar() {
           } w-full md:w-auto md:flex md:justify-end`}
         >
           <ul
-            className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-white rounded-lg bg-nav-bg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-nav-bg text-center"
+            className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-white rounded-lg bg-nav-bg md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-nav-bg text-center"
             onClick={toggleMenu}
           >
             <li>
