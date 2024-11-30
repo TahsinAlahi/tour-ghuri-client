@@ -7,6 +7,11 @@ export default {
         nav: "#8fbfda",
         "nav-active": "#5897de",
       },
+      fontFamily: {
+        playfair: ["Playfair", "serif"],
+        nunito: ["Nunito", "sans-serif"],
+        cinzel: ["Cinzel Decorative", "cursive"],
+      },
     },
   },
   plugins: [],
