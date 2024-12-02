@@ -15,6 +15,10 @@ export default {
       borderColor: {
         "title-underline": "#2f4156",
       },
+      backgroundImage: {
+        "home-card":
+          "linear-gradient(180deg, rgba(0, 0, 0, 0.61) 2%, transparent 80%)",
+      },
     },
   },
   plugins: [],
