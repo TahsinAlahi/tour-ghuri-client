@@ -22,8 +22,8 @@ const inputFieldArr = [
     name: "short_description",
   },
   {
-    title: "Average Cost",
-    placeholder: "Enter Average Cost",
+    title: "Average Cost ($)",
+    placeholder: "Enter Average Cost (e.g., 1000)",
     name: "average_cost",
   },
   {
@@ -32,7 +32,7 @@ const inputFieldArr = [
     name: "seasonality",
   },
   {
-    title: "Travel Time",
+    title: "Travel Time (days)",
     placeholder: "Enter Travel Time (e.g., 7 days)",
     name: "travel_time",
   },
@@ -56,6 +56,22 @@ const inputFieldArr = [
 function AddTouristPage() {
   const formRef = useRef(null);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const form = formRef.current;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    if (
+      isNaN(data.average_cost) ||
+      isNaN(data.totalVisitorsPerYear) ||
+      isNaN(data.travel_time)
+    ) {
+      alert("Please enter valid numbers");
+      return;
+    }
+  }
+
   return (
     <main className="min-h-[calc(100svh-72px)] max-w-screen-lg mx-auto font-nunito">
       <h1 className="text-5xl font-bold text-center mb-10 border-b-4 border-title-underline w-fit mx-auto font-playfair pt-10">
@@ -65,6 +81,7 @@ function AddTouristPage() {
       <form
         className="md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-2 w-full gap-4 text-primary px-4"
         ref={formRef}
+        onSubmit={handleSubmit}
       >
         {inputFieldArr.map((inputField, index) => (
           <div className="w-full space-y-2" key={index}>
@@ -74,6 +91,7 @@ function AddTouristPage() {
               className="w-full py-2 px-3 rounded-md outline-none text-lg border-2"
               placeholder={inputField.placeholder}
               name={inputField.name}
+              required
             />
           </div>
         ))}
