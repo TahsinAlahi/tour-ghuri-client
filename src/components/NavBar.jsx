@@ -70,7 +70,7 @@ function NavBar() {
               </NavLink>
             </li>
             <li className="md:block">
-              <NavLink to="/new-spots" className={activeClass}>
+              <NavLink to="add-tourist-spot" className={activeClass}>
                 Add tourist spots
               </NavLink>
             </li>

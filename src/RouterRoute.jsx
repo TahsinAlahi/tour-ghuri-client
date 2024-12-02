@@ -3,6 +3,7 @@ import AppLayout from "./layouts/AppLayout";
 import HomePage from "./pages/HomePage";
 import TourSpotPage from "./pages/TourSpotPage";
 import AllTouristSpotsPage from "./pages/AllTouristSpotsPage";
+import AddTouristPage from "./pages/AddTouristPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/all-tourist-spots",
         element: <AllTouristSpotsPage />,
+      },
+      {
+        path: "/add-tourist-spot",
+        element: <AddTouristPage />,
       },
     ],
   },
