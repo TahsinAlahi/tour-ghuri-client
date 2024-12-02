@@ -2,14 +2,16 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase.config";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithPopup,
   updateProfile,
 } from "firebase/auth";
 
 const authContext = createContext(null);
 
 function AuthContext({ children }) {
-  const [authLoading, setAuthLoading] = useState(true);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   async function registerWithEmail(email, password, displayName, imageUrl) {
@@ -41,14 +43,47 @@ function AuthContext({ children }) {
       }
 
       return { status: "error", message: errorMessage };
+    } finally {
+      setIsAuthLoading(false);
+    }
+  }
+
+  async function loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+      setUser(userCredential.user);
+      return { status: "success", message: "User logged in successfully" };
+    } catch (error) {
+      console.log(error);
+
+      let errorMessage = "An error occurred during login. Please try again.";
+      if (error.code === "auth/popup-closed-by-user") {
+        errorMessage =
+          "The login popup was closed before completing the sign-in.";
+      } else if (error.code === "auth/cancelled-popup-request") {
+        errorMessage = "Multiple login attempts detected. Please try again.";
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Network error. Please check your connection.";
+      } else if (error.code === "auth/invalid-credential") {
+        errorMessage = "Invalid credentials provided. Please try again.";
+      } else if (
+        error.code === "auth/account-exists-with-different-credential"
+      ) {
+        errorMessage =
+          "An account already exists with the same email but different credentials.";
+      }
+
+      return { status: "error", message: errorMessage };
     }
   }
 
   useEffect(() => {
-    setAuthLoading(true);
+    setIsAuthLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setAuthLoading(false);
+      setIsAuthLoading(false);
     });
 
     console.log(user);
