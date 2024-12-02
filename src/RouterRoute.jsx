@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import TourSpotPage from "./pages/TourSpotPage";
 import AllTouristSpotsPage from "./pages/AllTouristSpotsPage";
 import AddTouristPage from "./pages/AddTouristPage";
+import LoginPage from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/add-tourist-spot",
         element: <AddTouristPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
   },

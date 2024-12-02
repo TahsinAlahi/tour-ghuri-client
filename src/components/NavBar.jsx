@@ -79,10 +79,13 @@ function NavBar() {
                 My list
               </NavLink>
             </li>
-            <li className="md:block">
-              <div className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer">
-                Logout
-              </div>
+            <li className="md:block hidden">
+              <Link
+                to="/login"
+                className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer"
+              >
+                Login
+              </Link>
             </li>
 
             {/* <li className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer hover:bg-nav-active md:hidden">
