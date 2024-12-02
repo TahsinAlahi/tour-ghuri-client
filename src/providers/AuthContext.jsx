@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
@@ -48,6 +49,42 @@ function AuthContext({ children }) {
     }
   }
 
+  async function loginWithEmail(email, password) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      setUser(userCredential.user);
+      return { status: "success", message: "User logged in successfully" };
+    } catch (error) {
+      console.log(error);
+
+      let errorMessage;
+      if (error.code === "auth/user-not-found") {
+        errorMessage = "No user found with this email. Please sign up first.";
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage =
+          "The password you entered is incorrect. Please try again.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage =
+          "The email address is invalid. Please enter a valid email.";
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Network error. Please check your connection.";
+      } else if (error.code === "auth/too-many-requests") {
+        errorMessage = "Too many failed attempts. Please try again later.";
+      } else {
+        errorMessage = "An unknown error occurred. Please try again.";
+      }
+
+      return { status: "error", message: errorMessage };
+    } finally {
+      setIsAuthLoading(false);
+    }
+  }
+
   async function loginWithGoogle() {
     const provider = new GoogleAuthProvider();
 
@@ -76,6 +113,8 @@ function AuthContext({ children }) {
       }
 
       return { status: "error", message: errorMessage };
+    } finally {
+      setIsAuthLoading(false);
     }
   }
 
