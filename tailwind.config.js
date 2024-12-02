@@ -8,6 +8,7 @@ export default {
         "nav-active": "#5897de",
         global: "#E7E8E7",
         "detail-btn": "#cabfb8",
+        "detail-btn-hover": "#9e9691",
       },
       fontFamily: {
         playfair: ["Playfair", "serif"],
