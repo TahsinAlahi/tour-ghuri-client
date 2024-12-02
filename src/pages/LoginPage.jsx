@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoginWithGoogle from "../components/LoginWithGoogle";
 
 function LoginPage() {
   const emailRef = useRef();
@@ -13,8 +14,8 @@ function LoginPage() {
   }
 
   return (
-    <div className="bg-slate-100 min-h-[calc(100svh-72px)] flex items-center justify-center flex-col font-nunito">
-      <div className="lg:mx-auto flex-grow w-full mt-6">
+    <div className="bg-slate-100 min-h-[calc(100svh-72px)]  flex items-center justify-center flex-col font-nunito">
+      <div className="lg:mx-auto flex-grow w-full mt-6 mb-10">
         <div className="bg-white w-full lg:w-2/5 lg:mx-auto h-fit my-auto py-8 px-10 rounded-lg">
           <h1 className="pb-2 mb-5 border-b-4 border-[#5897de] lg:text-3xl text-2xl font-semibold text-center text-gray-700 font-playfair">
             Login your account
@@ -84,6 +85,8 @@ function LoginPage() {
             <span className="px-4 text-gray-500 font-bold text-lg">OR</span>
             <div className="flex-1 border-t border-gray-400" />
           </div>
+
+          <LoginWithGoogle />
         </div>
       </div>
     </div>

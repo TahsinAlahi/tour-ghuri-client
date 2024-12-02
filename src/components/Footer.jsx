@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div className="border-t-2 shadow-md mt-10 md:mt-10 text-gray-600 py-14 font-roboto">
+    <div className="border-t-2 shadow-md text-gray-600 py-14 font-roboto">
       <footer>
         <div className="flex justify-center space-x-4 pb-6">
           <a
