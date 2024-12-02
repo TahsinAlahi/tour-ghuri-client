@@ -12,6 +12,9 @@ export default {
         nunito: ["Nunito", "sans-serif"],
         cinzel: ["Cinzel Decorative", "cursive"],
       },
+      borderColor: {
+        "title-underline": "#2f4156",
+      },
     },
   },
   plugins: [],
