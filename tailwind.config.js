@@ -17,7 +17,7 @@ export default {
       },
       backgroundImage: {
         "home-card":
-          "linear-gradient(180deg, rgba(0, 0, 0, 0.61) 2%, transparent 80%)",
+          "linear-gradient(0deg,rgba(0, 0, 0, 0.5) 7%,rgba(255, 255, 255, 0) 40%,rgba(0, 0, 0, 0.5) 90%)",
       },
     },
   },
