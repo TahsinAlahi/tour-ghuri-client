@@ -1,5 +1,6 @@
 import { IoLocationSharp } from "react-icons/io5";
 import testImage from "../assets/hero-3.png";
+import { Link } from "react-router";
 
 function HomeTouristCard() {
   return (
@@ -22,7 +23,9 @@ function HomeTouristCard() {
               <span className="capitalize">data.country</span>
             </p>
           </div>
-          <button className="bg-white text-black px-3 py-1">View more</button>
+          <Link to={`/tours/2`} className="bg-white text-black px-3 py-1">
+            View more
+          </Link>
         </div>
       </div>
     </div>
