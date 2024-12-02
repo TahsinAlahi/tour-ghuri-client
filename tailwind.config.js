@@ -6,6 +6,7 @@ export default {
       backgroundColor: {
         nav: "#8fbfda",
         "nav-active": "#5897de",
+        global: "#E7E8E7",
       },
       fontFamily: {
         playfair: ["Playfair", "serif"],
