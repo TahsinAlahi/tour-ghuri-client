@@ -120,6 +120,37 @@ function AuthContext({ children }) {
     }
   }
 
+  async function updateUserProfile(displayName, imageUrl) {
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: displayName,
+        photoURL: imageUrl,
+      });
+
+      return {
+        status: "success",
+        message: "Profile updated successfully",
+      };
+    } catch (error) {
+      console.log("Update profile error:", error);
+
+      let errorMessage =
+        "An unknown error occurred while updating the profile. Please try again.";
+      if (error.code === "auth/user-not-found") {
+        errorMessage =
+          "No authenticated user found. Please log in and try again.";
+      } else if (error.code === "auth/invalid-user-token") {
+        errorMessage = "Your session has expired. Please log in again.";
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Network error. Please check your connection.";
+      }
+      return {
+        status: "error",
+        message: errorMessage,
+      };
+    }
+  }
+
   async function forgotPassword(email) {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -172,6 +203,7 @@ function AuthContext({ children }) {
     user,
     registerWithEmail,
     loginWithEmail,
+    updateUserProfile,
     forgotPassword,
     loginWithGoogle,
     logout,
