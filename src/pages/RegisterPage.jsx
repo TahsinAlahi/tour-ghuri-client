@@ -12,6 +12,11 @@ function RegisterPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const form = formRef.current;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    console.log(data);
   }
 
   return (

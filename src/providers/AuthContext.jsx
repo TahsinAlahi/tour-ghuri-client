@@ -17,7 +17,7 @@ function AuthContext({ children }) {
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  async function registerWithEmail(email, password, displayName, imageUrl) {
+  async function registerWithEmail(email, password, username, imageUrl) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -26,7 +26,7 @@ function AuthContext({ children }) {
       );
 
       await updateProfile(userCredential.user, {
-        displayName: displayName,
+        displayName: username,
         photoURL: imageUrl,
       });
 
@@ -120,10 +120,10 @@ function AuthContext({ children }) {
     }
   }
 
-  async function updateUserProfile(displayName, imageUrl) {
+  async function updateUserProfile(username, imageUrl) {
     try {
       await updateProfile(auth.currentUser, {
-        displayName: displayName,
+        displayName: username,
         photoURL: imageUrl,
       });
 
