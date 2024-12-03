@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import logoImg from "../assets/logo.png";
+import { useAuth } from "../providers/AuthContext";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -79,13 +81,29 @@ function NavBar() {
                 My list
               </NavLink>
             </li>
-            <li className="md:block hidden">
-              <Link
-                to="/login"
-                className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer"
-              >
-                Login
-              </Link>
+            {user && (
+              <li className="md:hidden block">
+                <NavLink to="/user" className={activeClass}>
+                  Profile
+                </NavLink>
+              </li>
+            )}
+            <li className="md:hidden block">
+              {user ? (
+                <button
+                  className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer"
+                >
+                  Login
+                </Link>
+              )}
             </li>
 
             {/* <li className="block md:py-1 py-2 px-3  rounded text-black font-semibold cursor-pointer hover:bg-nav-active md:hidden">
@@ -94,20 +112,34 @@ function NavBar() {
           </ul>
         </div>
         <div className="md:flex items-center justify-center gap-2 ml-10 hidden">
-          <div
-            to="/user"
-            className="p-1 w-10 aspect-square rounded-full overflow-hidden  bg-gray-600 cursor-pointer"
-          >
-            <img
-              src=""
-              alt=""
-              className="w-full h-full object-cover object-center"
-            />
-          </div>
+          {user ? (
+            <>
+              <Link
+                to="/user"
+                className="p-1 w-10 aspect-square rounded-full overflow-hidden  bg-gray-600 cursor-pointer"
+              >
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName}
+                  className="w-full h-full object-cover object-center"
+                />
+              </Link>
 
-          <h1 className="bg-nav-active hover:bg-blue-600 duration-100 transition-all  px-2 py-1 rounded font-semibold cursor-pointer">
-            Login
-          </h1>
+              <button
+                className="bg-nav-active hover:bg-blue-600 duration-100 transition-all  px-2 py-1 rounded font-semibold cursor-pointer"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-nav-active hover:bg-blue-600 duration-100 transition-all  px-2 py-1 rounded font-semibold cursor-pointer"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
