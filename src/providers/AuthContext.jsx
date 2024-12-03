@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -119,6 +120,34 @@ function AuthContext({ children }) {
     }
   }
 
+  async function forgotPassword(email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      return {
+        status: "success",
+        message: "Password reset email sent successfully",
+      };
+    } catch (error) {
+      console.log(error);
+
+      let errorMessage = "An unknown error occurred. Please try again.";
+      if (error.code === "auth/user-not-found") {
+        errorMessage =
+          "No user found with this email. Please check the email entered.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage =
+          "The email address is invalid. Please enter a valid email.";
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Network error. Please check your connection.";
+      }
+
+      return {
+        status: "error",
+        message: errorMessage,
+      };
+    }
+  }
+
   async function logout() {
     try {
       await signOut(auth);
@@ -143,7 +172,9 @@ function AuthContext({ children }) {
     user,
     registerWithEmail,
     loginWithEmail,
+    forgotPassword,
     loginWithGoogle,
+    logout,
   };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
