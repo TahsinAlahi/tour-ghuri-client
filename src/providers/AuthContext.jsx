@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -118,6 +119,14 @@ function AuthContext({ children }) {
     }
   }
 
+  async function logout() {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     setIsAuthLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -130,7 +139,12 @@ function AuthContext({ children }) {
     return () => unsubscribe();
   }, []);
 
-  const value = { user, registerWithEmail };
+  const value = {
+    user,
+    registerWithEmail,
+    loginWithEmail,
+    loginWithGoogle,
+  };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
